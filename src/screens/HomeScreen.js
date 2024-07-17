@@ -4,14 +4,14 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'rea
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#c8c8ff',
+        backgroundColor: '#d8f5ff',
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 16,
-        backgroundColor: '#c6e4ff',
+        backgroundColor: '#cce8f2',
     },
     headerText: {
         fontSize: 16,
@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
-        backgroundColor: '#c0c0c0',
-        padding: 40,
+        backgroundColor: '#ffff',
+        padding: 10,
         paddingVertical: 40,
         borderRadius: 8,
         elevation: 20,
         borderColor: '#138ede',
-        margin: 8, // Agrega un margen de 8px en todos los lados
+        margin: 18, // Agrega un margen de 8px en todos los lados
     },
     row: {
         flexDirection: 'row',
@@ -109,7 +109,7 @@ const HomeScreen = () => {
                         <View style={styles.imageContainer}>
                             <Image source={require('../../assets/admin.png')} style={styles.image} />
                         </View>
-                        <Text style={styles.buttonText}>USUARIO</Text>
+                        <Text style={styles.buttonText}>ADMINISTRADOR</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
