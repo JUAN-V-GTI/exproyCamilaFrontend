@@ -42,6 +42,8 @@ npx expo install react-native-safe-area-context
 npx expo install react-native-svg npx expo install react-native-svg
 npx expo install @react-navigation/native @react-navigation/stack
 npx expo install react-native-screens react-native-safe-area-context
+npx expo install react-native-elements
+npx expo install react-native-vector-icons
 
 *********estructura del proyecto************
 EXPROY-CAMILA-FRONT-APP
@@ -81,3 +83,24 @@ New-Item -ItemType File -Path src/screens/HomeScreen.js
 New-Item -ItemType File -Path src/screens/LoginScreen.js
 New-Item -ItemType File -Path src/screens/RegisterScreen.js
 New-Item -ItemType File -Path src/services/Auth.js
+***********uso de la aplicacion Expogo***************
+
+Press s │ switch to development build:
+Al presionar la tecla “s”, cambiarás a la versión de desarrollo de tu aplicación.
+La versión de desarrollo incluye herramientas de depuración y permite ver los errores y advertencias en la consola.
+
+Press j │ open debugger:
+Al presionar la tecla “j”, abrirás el depurador de JavaScript.
+Puedes usar esto para inspeccionar el código, establecer puntos de interrupción y depurar problemas.
+
+Press r │ reload app:
+Al presionar la tecla “r”, recargarás la aplicación.
+Útil para aplicar cambios en tiempo real mientras desarrollas.
+
+Press m │ toggle menu:
+Al presionar la tecla “m”, mostrarás u ocultarás el menú de desarrollo.
+El menú contiene opciones adicionales para depurar y configurar tu aplicación.
+
+Press o │ open project code in your editor:
+Al presionar la tecla “o”, abrirás el código fuente de tu proyecto en tu editor de código configurado.
+Esto te permite realizar cambios en el código directamente desde tu editor.
