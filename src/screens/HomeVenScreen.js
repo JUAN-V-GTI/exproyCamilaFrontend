@@ -61,13 +61,11 @@ const styles = StyleSheet.create({
     },
 });
 
-const HomeScreen = ({ route }) => {
-    const { username } = route.params;
-
+const HomeVenScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Bienvenida, {username}!</Text>
+                <Text style={styles.headerText}>Bienvenida!</Text>
                 <Text style={styles.headerText}>VENDEDOR</Text>
             </View>
 
@@ -119,4 +117,4 @@ const HomeScreen = ({ route }) => {
     );
 };
 
-export default HomeScreen;
+export default HomeVenScreen;
