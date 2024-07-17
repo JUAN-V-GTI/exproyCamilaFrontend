@@ -34,7 +34,6 @@ npx create-expo-app@latest exproy-camila-front-app --template blank
 *********config proyecto************
 npx expo install react-dom react-native-web @expo/metro-runtime
 npx expo lint
-mkdir -p src/{screens,components,constants,hooks,navigation,services}
 
 *********dependencias************
 npx expo install -- --save-dev prettier eslint-config-prettier eslint-plugin-prettier
@@ -69,4 +68,16 @@ EXPROY-CAMILA-FRONT-APP
 ├── package.json
 └── note
 
-*********-----***********
+*********crear carpetas y archivos***********
+mkdir src
+mkdir src/screens
+mkdir src/components
+mkdir src/constants
+mkdir src/hooks
+mkdir src/navigation
+mkdir src/services
+
+New-Item -ItemType File -Path src/screens/HomeScreen.js
+New-Item -ItemType File -Path src/screens/LoginScreen.js
+New-Item -ItemType File -Path src/screens/RegisterScreen.js
+New-Item -ItemType File -Path src/services/Auth.js
