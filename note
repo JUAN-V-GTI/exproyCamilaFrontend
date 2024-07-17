@@ -1,0 +1,72 @@
+*********requerimientos de mi proyecto************
+necesito crear la nueva  estructura de  mi proyecto para las carpetas y archivos que se creran
+por ejemplo  como los screens, components contants hooks navigation services etc   
+crear un Login un register y un home 
+como pantalla principal estará el login 
+consumir los endpoint que ccreados en el backend que esta desarrollado con springboot y JWT  
+
+*********datos de endpoint controller************
+; // @RequestMapping("/auth")
+; // @CrossOrigin(origins = "http://localhost:8080")
+; // public class AuthController {
+; //    @PostMapping(value = "login")
+; //    @PostMapping(value = "register")
+                                 
+*********datos requeridos para los endpoint************
+; //  LoginRequest 
+; //      username;
+; //      password;
+
+; //  RegisterRequest 
+; //      username;
+; //      password;
+; //      firstname;
+; //      lastname;
+; //      country;
+; //      Role;
+
+
+
+
+*********crear proyecto************
+npx create-expo-app@latest exproy-camila-front-app --template blank
+
+*********config proyecto************
+npx expo install react-dom react-native-web @expo/metro-runtime
+npx expo lint
+mkdir -p src/{screens,components,constants,hooks,navigation,services}
+
+*********dependencias************
+npx expo install -- --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+npx expo  install expo-constants
+npx expo install react-native-safe-area-context
+npx expo install react-native-svg npx expo install react-native-svg
+npx expo install @react-navigation/native @react-navigation/stack
+npx expo install react-native-screens react-native-safe-area-context
+
+*********estructura del proyecto************
+EXPROY-CAMILA-FRONT-APP
+├── assets
+├── node_modules
+├── src
+│   ├── components
+│   ├── constants
+│   ├── hooks
+│   ├── navigation
+│   ├── screens
+│   │   ├── HomeScreen.js
+│   │   ├── LoginScreen.js
+│   │   └── RegisterScreen.js
+│   ├── services
+│   │   ├── auth.js
+│   └── AppNavigator.js
+├── .eslintrc.js
+├── .gitignore
+├── App.js
+├── app.json
+├── babel.config.js
+├── package-lock.json
+├── package.json
+└── note
+
+*********-----***********
