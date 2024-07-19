@@ -1,6 +1,63 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 
+
+
+const HomeVenScreen = () => {
+    return (
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.headerText}>Bienvenida!</Text>
+                <Text style={styles.headerText}>VENDEDOR</Text>
+            </View>
+
+            <ScrollView >
+                <View style={styles.row}>
+                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../assets/catalog.png')} style={styles.image} />
+                        </View>
+                        <Text style={styles.buttonText}>CATALOGO</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../assets/mon.png')} style={styles.image} />
+                        </View>
+                        <Text style={styles.buttonText}>VENTAS</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.row}>
+                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../assets/camions.png')} style={styles.image} />
+                        </View>
+                        <Text style={styles.buttonText}>PEDIDOS</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../assets/doc.png')} style={styles.image} />
+                        </View>
+                        <Text style={styles.buttonText}>CLIENTES</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.row}>
+                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../assets/inve.png')} style={styles.image} />
+                        </View>
+                        <Text style={styles.buttonText}>INVENTARIO</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../assets/admin.png')} style={styles.image} />
+                        </View>
+                        <Text style={styles.buttonText}>ADMINISTRADOR</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </View>
+    );
+};
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -60,61 +117,4 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
 });
-
-const HomeVenScreen = () => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>Bienvenida!</Text>
-                <Text style={styles.headerText}>VENDEDOR</Text>
-            </View>
-
-            <ScrollView >
-                <View style={styles.row}>
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/catalog.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>CATALOGO</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/mon.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>VENTAS</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.row}>
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/camions.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>PEDIDOS</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/doc.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>CLIENTES</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.row}>
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/inve.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>INVENTARIO</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/admin.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>ADMINISTRADOR</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        </View>
-    );
-};
-
 export default HomeVenScreen;

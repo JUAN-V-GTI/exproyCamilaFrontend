@@ -127,6 +127,7 @@ const RegisterScreen = ({ navigation }) => {
                 <TouchableOpacity style={styles.cajaBoton} onPress={handleRegister}>
                     <Text style={styles.textBoton}>Registrar</Text>
                 </TouchableOpacity>
+               
             )}
         </KeyboardAvoidingView>
     );
