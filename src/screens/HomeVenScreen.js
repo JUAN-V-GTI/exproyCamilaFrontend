@@ -61,13 +61,11 @@ const styles = StyleSheet.create({
     },
 });
 
-const HomeScreen = ({ route }) => {
-    const { username } = route.params;
-
+const HomeVenScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Bienvenida, {username}!</Text>
+                <Text style={styles.headerText}>Bienvenida!</Text>
                 <Text style={styles.headerText}>VENDEDOR</Text>
             </View>
 
@@ -109,9 +107,9 @@ const HomeScreen = ({ route }) => {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={() => { }}>
                         <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/VEND.png')} style={styles.image} />
+                            <Image source={require('../../assets/admin.png')} style={styles.image} />
                         </View>
-                        <Text style={styles.buttonText}>VENDEDORES</Text>
+                        <Text style={styles.buttonText}>ADMINISTRADOR</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -119,4 +117,4 @@ const HomeScreen = ({ route }) => {
     );
 };
 
-export default HomeScreen;
+export default HomeVenScreen;
