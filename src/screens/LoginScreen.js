@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-// import {} from '@rneui/themed'
+
 import { login } from '../services/Auth.js';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Alert } from 'react-native';
+
 const LoginScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberPassword, setRememberPassword] = useState(false);
 
     const handleLogin = async () => {
+        if (!username || !password) {
+            Alert.alert("Campos Vacíos", "Por favor ingrese su usuario y contraseña.");
+            return;
+        }
+    
         try {
             await login({ username, password });
-            // Navegar a HomeScreen y pasar el nombre de usuario como parámetro
             navigation.navigate('Home', { username });
         } catch (error) {
             console.error(error);
+            Alert.alert("Error de Login", "Usuario no encontrado. Verifique sus credenciales.");
         }
     };
+    
 
     const handleRegister = () => {
         navigation.navigate('Register');
@@ -50,13 +58,7 @@ const LoginScreen = ({ navigation }) => {
                     autoCapitalize="none"
                 />
             </View>
-            {/* <View style={styles.checkboxT}>
-                <CheckBox
-                    checked={rememberPassword}
-                    onPress={() => setRememberPassword(!rememberPassword)}
-                />
-                <Text style={styles.Terminos}>Recordar Contraseñas</Text>
-            </View> */}
+          
             <View style={styles.padreBoton}>
                 <TouchableOpacity style={styles.cajaBoton} onPress={handleLogin}>
                     <Text style={styles.textBoton}>Sign In</Text>
