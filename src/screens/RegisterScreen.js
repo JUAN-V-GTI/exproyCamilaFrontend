@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { register } from '../services/Auth.js';
 
 const RegisterScreen = ({ navigation }) => {
@@ -7,12 +8,29 @@ const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
-    const [country, setCountry] = useState('');
+    const [sex, setSex] = useState('');
+    const [rfc, setrfc] = useState('');
+    const [phone_Number, setphone_Number] = useState('');
     const [role, setRole] = useState('');
+    const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardOpen(true);
+        });
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardOpen(false);
+        });
+
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
 
     const handleRegister = async () => {
         try {
-            await register({ username, password, firstname, lastname, country, role });
+            await register({ username, password, firstname, lastname, sex, rfc, phone_Number, role });
             navigation.navigate('Login');
         } catch (error) {
             console.error(error);
@@ -20,49 +38,98 @@ const RegisterScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Register</Text>
-            <TextInput
-                placeholder="Username"
-                style={styles.textInput}
-                value={username}
-                onChangeText={setUsername}
-            />
-            <TextInput
-                placeholder="Password"
-                style={styles.textInput}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            <TextInput
-                placeholder="Firstname"
-                style={styles.textInput}
-                value={firstname}
-                onChangeText={setFirstname}
-            />
-            <TextInput
-                placeholder="Lastname"
-                style={styles.textInput}
-                value={lastname}
-                onChangeText={setLastname}
-            />
-            <TextInput
-                placeholder="Country"
-                style={styles.textInput}
-                value={country}
-                onChangeText={setCountry}
-            />
-            <TextInput
-                placeholder="Role"
-                style={styles.textInput}
-                value={role}
-                onChangeText={setRole}
-            />
-            <TouchableOpacity style={styles.cajaBoton} onPress={handleRegister}>
-                <Text style={styles.textBoton}>Register</Text>
-            </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+            <Image source={require('../../assets/registro-u.png')} style={[styles.logo, keyboardOpen && styles.hidden]} />
+            <Text style={[styles.titulo, keyboardOpen && styles.hidden]}>Registro de Usuarios</Text>
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+                <View style={styles.inputWrapper}>
+                    <View style={styles.inputContainer}>
+                        <Icon name="person-outline" size={24} color="#525fe1" style={styles.icon} />
+                        <TextInput
+                            placeholder="Nombres"
+                            style={styles.textInput}
+                            value={username}
+                            onChangeText={setUsername}
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Icon name="lock-closed-outline" size={24} color="#525fe1" style={styles.icon} />
+                        <TextInput
+                            placeholder="Contraseña"
+                            style={styles.textInput}
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Icon name="person-outline" size={24} color="#525fe1" style={styles.icon} />
+                        <TextInput
+                            placeholder="Apellido Paterno"
+                            style={styles.textInput}
+                            value={firstname}
+                            onChangeText={setFirstname}
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Icon name="person-outline" size={24} color="#525fe1" style={styles.icon} />
+                        <TextInput
+                            placeholder="Apellido Materno"
+                            style={styles.textInput}
+                            value={lastname}
+                            onChangeText={setLastname}
+                        />
+                    </View>
+                    <View style={styles.rowContainer}>
+                        <View style={[styles.inputContainer, styles.halfWidth]}>
+                            <Icon name="document-text-outline" size={24} color="#525fe1" style={styles.icon} />
+                            <TextInput
+                                placeholder="RFC"
+                                style={styles.textInput}
+                                value={rfc}
+                                onChangeText={setrfc}
+                            />
+                        </View>
+                        <View style={[styles.inputContainer, styles.halfWidth]}>
+                            <Icon name="male-female-outline" size={24} color="#525fe1" style={styles.icon} />
+                            <TextInput
+                                placeholder="Genero"
+                                style={styles.textInput}
+                                value={sex}
+                                onChangeText={setSex}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Icon name="call-outline" size={24} color="#525fe1" style={styles.icon} />
+                        <TextInput
+                            placeholder="Numero telefonico Movil"
+                            style={styles.textInput}
+                            value={phone_Number}
+                            onChangeText={setphone_Number}
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Icon name="briefcase-outline" size={24} color="#525fe1" style={styles.icon} />
+                        <TextInput
+                            placeholder="Role"
+                            style={styles.textInput}
+                            value={role}
+                            onChangeText={setRole}
+                        />
+                    </View>
+                </View>
+            </ScrollView>
+            {!keyboardOpen && (
+                <TouchableOpacity style={styles.cajaBoton} onPress={handleRegister}>
+                    <Text style={styles.textBoton}>Registrar</Text>
+                </TouchableOpacity>
+               
+            )}
+        </KeyboardAvoidingView>
     );
 };
 
@@ -71,29 +138,68 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#c8c8ff',
+        paddingVertical: 20,
+    },
+    logo: {
+        width: 150,
+        height: 150,
+        marginBottom: 20,
+        marginTop: 20,
+    },
+    hidden: {
+        display: 'none',
     },
     titulo: {
         fontSize: 24,
         marginBottom: 20,
     },
-    textInput: {
-        width: '80%',
-        height: 40,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        marginBottom: 10,
+    scrollViewContainer: {
+        alignItems: 'center',
+        paddingBottom: 60,
+        paddingTop: 10,
+    },
+    inputWrapper: {
+        width: '90%',
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 8,
+        marginBottom: 15,
         paddingHorizontal: 10,
+        elevation: 5,
+    },
+    rowContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 1,
+    },
+    halfWidth: {
+        width: '48%',
+    },
+    icon: {
+        marginRight: 10,
+    },
+    textInput: {
+        flex: 1,
+        height: 50,
+        color: '#525fe1',
     },
     cajaBoton: {
         backgroundColor: '#525fe1',
-        padding: 10,
-        borderRadius: 5,
+        borderRadius: 10,
+        paddingVertical: 10,
+        width: 150,
         marginTop: 20,
+        marginBottom: 30,
     },
     textBoton: {
-        color: '#fff',
+        textAlign: 'center',
+        color: 'white',
     },
 });
 
 export default RegisterScreen;
+ 

@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = ({ route }) => {
+
+const HomeVenScreen = ({ route }) => {
     const { username } = route.params;
     const navigation = useNavigation();
   
@@ -27,8 +28,8 @@ const HomeScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Bienvenido, {username}!</Text>
-                <Text style={styles.headerText}>ADMIN</Text>
+                <Text style={styles.headerText}>Bienvenida, {username}!</Text>
+                <Text style={styles.headerText}>VENDEDOR</Text>
             </View>
 
             <ScrollView >
@@ -39,17 +40,17 @@ const HomeScreen = ({ route }) => {
                         </View>
                         <Text style={styles.buttonText}>CATALOGO</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={handleVenta}>
+                    <TouchableOpacity style={styles.button} onPress={handleCliente}>
                         <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/mon.png')} style={styles.image} />
+                          <Image source={require('../../assets/doc.png')} style={styles.image} />
                         </View>
-                        <Text style={styles.buttonText}>VENTAS</Text>
+                        <Text style={styles.buttonText}>CLIENTES</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.row}>
                     <TouchableOpacity style={styles.button} onPress={handlePedido}>
                         <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/camions.png')} style={styles.image} />
+                            <Image source={require('../../assets/pedi.png')} style={styles.image} />
                         </View>
                         <Text style={styles.buttonText}>PEDIDOS</Text>
                     </TouchableOpacity>
@@ -57,7 +58,7 @@ const HomeScreen = ({ route }) => {
                 <View style={styles.imageContainer}>
                 <Image source={require('../../assets/doc.png')} style={styles.image} />
                 </View>
-                <Text style={styles.buttonText}>CLIENTES</Text>
+                <Text style={styles.buttonText}>VENTAS</Text>
             </TouchableOpacity>
                 </View>
                 <View style={styles.row}>
@@ -67,12 +68,7 @@ const HomeScreen = ({ route }) => {
                         </View>
                         <Text style={styles.buttonText}>INVENTARIO</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={handleVendedor}>
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../assets/VEND.png')} style={styles.image} />
-                        </View>
-                        <Text style={styles.buttonText}>VENDEDORES</Text>
-                    </TouchableOpacity>
+                    
                 </View>
             </ScrollView>
         </View>
@@ -138,4 +134,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+export default HomeVenScreen;

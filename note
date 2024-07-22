@@ -44,6 +44,15 @@ npx expo install @react-navigation/native @react-navigation/stack
 npx expo install react-native-screens react-native-safe-area-context
 npx expo install react-native-elements
 npx expo install react-native-vector-icons
+expo install @expo/vector-icons
+ npm install react-native-gesture-handler
+  npm install react-native-reanimated 
+  npm install -g npm@latest 
+npm install @react-native-community/viewpager
+ npm install @react-native-community/unsafe-performant-view
+ npm install react-native-snap-carousel
+
+
 
 *********estructura del proyecto************
 EXPROY-CAMILA-FRONT-APP
@@ -61,6 +70,7 @@ EXPROY-CAMILA-FRONT-APP
 │   ├── services
 │   │   ├── auth.js
 │   └── AppNavigator.js
+├── styles
 ├── .eslintrc.js
 ├── .gitignore
 ├── App.js
