@@ -27,8 +27,8 @@ const HomeScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Bienvenida, {username}!</Text>
-                <Text style={styles.headerText}>VENDEDOR</Text>
+                <Text style={styles.headerText}>Bienvenido, {username}!</Text>
+                <Text style={styles.headerText}>ADMIN</Text>
             </View>
 
             <ScrollView >

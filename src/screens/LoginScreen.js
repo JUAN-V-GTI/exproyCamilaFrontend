@@ -18,7 +18,14 @@ const LoginScreen = ({ navigation }) => {
     
         try {
             await login({ username, password });
-            navigation.navigate('Home', { username });
+    
+            // Verificar si el usuario es "juanAdmin"
+            if (username === "JuanAdmin"|| username === "RaquelAdmin") {
+                navigation.navigate('Home', { username });
+            } else {
+                // Navegar a otra pantalla si no es "juanAdmin"
+                navigation.navigate('HomeVen', { username });
+            }
         } catch (error) {
             console.error(error);
             Alert.alert("Error de Login", "Usuario no encontrado. Verifique sus credenciales.");

@@ -13,21 +13,20 @@ import VentasScreen from '../screens/VentasScreen';
 import CatalogoScreen from '../screens/CatalogoScreen';
 
 const Stack = createStackNavigator();
-
 const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="HomeVen" component={HomeVenScreen} />
-        <Stack.Screen name="Cliente" component={ClientesScreen} />
-        <Stack.Screen name="Catalogo" component={CatalogoScreen} />
-        <Stack.Screen name="Venta" component={VentasScreen} />
-        <Stack.Screen name="Pedido" component={PedidosScreen} />
-        <Stack.Screen name="Inventario" component={InventarioScreen} />
-        <Stack.Screen name="Vendedor" component={VendedoresScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="HomeVen" component={HomeVenScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Cliente" component={ClientesScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Catalogo" component={CatalogoScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Venta" component={VentasScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Pedido" component={PedidosScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Inventario" component={InventarioScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Vendedor" component={VendedoresScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

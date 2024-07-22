@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Header = ({ setView, handleGoHome }) => {
+  const navigation = useNavigation(); // Obtiene el objeto navigation
   return (
     <View style={styles.header}>
       <View style={styles.menuButtons}>
@@ -11,7 +13,7 @@ const Header = ({ setView, handleGoHome }) => {
         <TouchableOpacity style={styles.menuButton} onPress={() => setView('register')}>
           <Text style={styles.menuButtonText}>REGISTRAR</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleGoHome}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require('../../assets/salir.png')} style={styles.exit} />
         </TouchableOpacity>
       </View>
