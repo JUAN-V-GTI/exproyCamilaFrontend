@@ -1,64 +1,68 @@
 // src/hooks/useCliente.js
 import { useState } from 'react';
 import { initialClienteData } from '../constants/clienteConstants';
+import axios from 'axios';
 // import { createCliente } from '../services/Auth';  // Asegúrate de tener este servicio implementado.
 
-const useCliente = () => {
-    const [view, setView] = useState('default');
-    const [clienteID, setClienteID] = useState('');
-    const [clienteData, setClienteData] = useState(null);
-    const [newClienteData, setNewClienteData] = useState(initialClienteData);
 
-    const handleRegister = async () => {
-        try {
-            await createCliente(newClienteData);
-            alert('Cliente registrado exitosamente');
-            setNewClienteData(initialClienteData);
-            setView('default');
-        } catch (error) {
-            console.error('Error al registrar cliente', error);
-        }
-    };
+const API_URL = 'http://192.168.100.2:8083/api/clientes';
 
-    const handleInputChange = (name, value) => {
-        if (view === 'edit' && clienteData) {
-            setClienteData({ ...clienteData, [name]: value });
-        } else {
-            setNewClienteData({ ...newClienteData, [name]: value });
-        }
-    };
+const useClienteForm = () => {
+  const [view, setView] = useState('default');
+  const [clienteID, setClienteID] = useState('');
+  const [clienteData, setClienteData] = useState(null);
+  const [newClienteData, setNewClienteData] = useState(initialClienteData);
 
-    const handleSearchCliente = () => {
-        // Simulación de búsqueda de cliente
-        setClienteData({
-            name: 'Juan',
-            firstname: 'Pérez',
-            lastname: 'García',
-            rfc: 'JPG123456789',
-            phoneNumber: '1234567890',
-            email: 'juan.perez@example.com',
-            notes: 'Cliente importante',
-            enabled: true,
-        });
-    };
+  const handleInputChange = (name, value) => {
+    if (view === 'edit') {
+      setClienteData({ ...clienteData, [name]: value });
+    } else {
+      setNewClienteData({ ...newClienteData, [name]: value });
+    }
+  };
 
-    const handleSaveChanges = () => {
-        // Implementar la lógica para guardar cambios
-        alert('Cambios guardados exitosamente');
-    };
+  const handleSearchCliente = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/search/${clienteID}`);
+      setClienteData(response.data);
+      setView('edit');
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.SEARCH_CLIENTE, error);
+    }
+  };
 
-    return {
-        view,
-        setView,
-        clienteID,
-        setClienteID,
-        clienteData,
-        newClienteData,
-        handleRegister,
-        handleInputChange,
-        handleSearchCliente,
-        handleSaveChanges,
-    };
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post(`${API_URL}/save/client`, newClienteData);
+      alert('Cliente registrado con éxito');
+      setNewClienteData(initialClienteData);
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.REGISTER_CLIENTE, error);
+    }
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      const response = await axios.put(`${API_URL}/update/${clienteID}`, clienteData);
+      alert('Cliente actualizado con éxito');
+      setClienteData(response.data);
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.UPDATE_CLIENTE, error);
+    }
+  };
+
+  return {
+    view,
+    setView,
+    clienteID,
+    setClienteID,
+    clienteData,
+    newClienteData,
+    handleRegister,
+    handleInputChange,
+    handleSearchCliente,
+    handleSaveChanges,
+  };
 };
 
-export default useCliente;
+export default useClienteForm;

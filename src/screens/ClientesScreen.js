@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import useClienteForm from '../hooks/useClienteForm';
 import styles from '../../styles/clienteStyles';
 import TextInputWithIcon from '../components/TextInputWithIcon';
 import Header from '../components/Header'; // Ajusta la importación según tu estructura de archivos
-
 
 const ClientesScreen = ({ navigation }) => {
   const {
@@ -71,8 +70,8 @@ const ClientesScreen = ({ navigation }) => {
               <TextInputWithIcon
                 icon="institution"
                 placeholder="Institución"
-                value={clienteData.rfc}
-                onChangeText={(text) => handleInputChange('rfc', text)}
+                value={clienteData.institution}
+                onChangeText={(text) => handleInputChange('institution', text)}
               />
               <TextInputWithIcon
                 icon="phone"
@@ -123,8 +122,8 @@ const ClientesScreen = ({ navigation }) => {
           <TextInputWithIcon
             icon="institution"
             placeholder="Institución"
-            value={newClienteData.rfc}
-            onChangeText={(text) => handleInputChange('rfc', text)}
+            value={newClienteData.institution}
+            onChangeText={(text) => handleInputChange('institution', text)}
           />
           <TextInputWithIcon
             icon="phone"

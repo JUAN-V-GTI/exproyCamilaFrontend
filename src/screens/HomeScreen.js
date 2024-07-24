@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 const HomeScreen = ({ route }) => {
     const { username } = route.params;
     const navigation = useNavigation();
@@ -25,6 +25,8 @@ const HomeScreen = ({ route }) => {
         navigation.navigate('Vendedor');
       };
     return (
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Bienvenido, {username}!</Text>
@@ -76,6 +78,8 @@ const HomeScreen = ({ route }) => {
                 </View>
             </ScrollView>
         </View>
+         </SafeAreaView>
+         </SafeAreaProvider>
     );
 };
 const styles = StyleSheet.create({

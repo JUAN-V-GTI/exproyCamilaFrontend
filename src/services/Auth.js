@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.100.3:8080/camila-acces';
+const API_URL = 'http://192.168.100.2:8080/camila-acces';
 
 export const login = async (credentials) => {
     try {
@@ -48,51 +48,3 @@ export const register = async (registerData) => {
    
 };
 
-
-// export const getClienteById = async (id) => {
-//     try {
-//         const response = await axios.get(`${API_URL}/search/${id}`);
-//         return response.data;
-//     } catch (error) {
-//         handleError(error);
-//     }
-// };
-
-// export const createCliente = async (clienteData) => {
-//     try {
-//         const response = await axios.post(`${API_URL}/save/client`, clienteData);
-//         return response.data;
-//     } catch (error) {
-//         handleError(error);
-//     }
-// };
-
-// export const updateCliente = async (id, clienteData) => {
-//     try {
-//         const response = await axios.put(`${API_URL}/update/${id}`, clienteData);
-//         return response.data;
-//     } catch (error) {
-//         handleError(error);
-//     }
-// };
-
-// export const disableCliente = async (id) => {
-//     try {
-//         await axios.delete(`${API_URL}/desable/${id}`);
-//     } catch (error) {
-//         handleError(error);
-//     }
-// };
-
-// const handleError = (error) => {
-//     if (error.response) {
-//         console.log(error.response.data);
-//         console.log(error.response.status);
-//         console.log(error.response.headers);
-//     } else if (error.request) {
-//         console.log(error.request);
-//     } else {
-//         console.log('Error', error.message);
-//     }
-//     throw error;
-// };
