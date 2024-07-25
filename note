@@ -45,12 +45,14 @@ npx expo install react-native-screens react-native-safe-area-context
 npx expo install react-native-elements
 npx expo install react-native-vector-icons
 expo install @expo/vector-icons
- npm install react-native-gesture-handler
-  npm install react-native-reanimated 
-  npm install -g npm@latest 
+npm install react-native-gesture-handler 
+npm install react-native-reanimated 
+npm install -g npm@latest 
 npm install @react-native-community/viewpager
- npm install @react-native-community/unsafe-performant-view
- npm install react-native-snap-carousel
+npm install @react-native-community/unsafe-performant-view
+npm install react-native-snap-carousel
+npm install react-native-reanimated react-native-gesture-handler
+npm install react-native-linear-gradient
 
 
 

@@ -3,6 +3,7 @@
     "name": "exproy-camila-front-app",
     "slug": "exproy-camila-front-app",
     "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

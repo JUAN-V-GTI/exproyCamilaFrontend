@@ -1,64 +1,97 @@
-// src/hooks/useCliente.js
-import { useState } from 'react';
-import { initialClienteData } from '../constants/clienteConstants';
-// import { createCliente } from '../services/Auth';  // Asegúrate de tener este servicio implementado.
+// src/hooks/useClienteForm.js
+import { useState } from "react";
+import { initialClienteData } from "../constants/clienteConstants";
+import axios from "axios";
+import { API_ERROR_MESSAGES } from "../constants/clienteConstants";
+const API_URL = "http://192.168.100.2:8083/api/clientes";
 
-const useCliente = () => {
-    const [view, setView] = useState('default');
-    const [clienteID, setClienteID] = useState('');
-    const [clienteData, setClienteData] = useState(null);
-    const [newClienteData, setNewClienteData] = useState(initialClienteData);
+const useClienteForm = () => {
+  const [view, setView] = useState("default");
+  const [clienteID, setClienteID] = useState("");
+  const [clienteData, setClienteData] = useState(null);
+  const [newClienteData, setNewClienteData] = useState(initialClienteData);
+  const [isClienteDisabled, setIsClienteDisabled] = useState(false);
 
-    const handleRegister = async () => {
-        try {
-            await createCliente(newClienteData);
-            alert('Cliente registrado exitosamente');
-            setNewClienteData(initialClienteData);
-            setView('default');
-        } catch (error) {
-            console.error('Error al registrar cliente', error);
-        }
-    };
+  const handleInputChange = (name, value) => {
+    if (view === "edit") {
+      setClienteData({ ...clienteData, [name]: value });
+    } else {
+      setNewClienteData({ ...newClienteData, [name]: value });
+    }
+  };
 
-    const handleInputChange = (name, value) => {
-        if (view === 'edit' && clienteData) {
-            setClienteData({ ...clienteData, [name]: value });
-        } else {
-            setNewClienteData({ ...newClienteData, [name]: value });
-        }
-    };
+  const handleSearchCliente = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/search/${clienteID}`);
+      setClienteData(response.data);
+      setView("edit");
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.SEARCH_CLIENTE, error);
+    }
+  };
 
-    const handleSearchCliente = () => {
-        // Simulación de búsqueda de cliente
-        setClienteData({
-            name: 'Juan',
-            firstname: 'Pérez',
-            lastname: 'García',
-            rfc: 'JPG123456789',
-            phoneNumber: '1234567890',
-            email: 'juan.perez@example.com',
-            notes: 'Cliente importante',
-            enabled: true,
-        });
-    };
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/save/client`,
+        newClienteData
+      );
+      alert("Cliente registrado con éxito");
+      setNewClienteData(initialClienteData);
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.REGISTER_CLIENTE, error);
+    }
+  };
 
-    const handleSaveChanges = () => {
-        // Implementar la lógica para guardar cambios
-        alert('Cambios guardados exitosamente');
-    };
+  const handleSaveChanges = async () => {
+    try {
+      const response = await axios.put(
+        `${API_URL}/update/${clienteID}`,
+        clienteData
+      );
+      alert("Cliente actualizado con éxito");
+      setClienteData(response.data);
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.UPDATE_CLIENTE, error);
+    }
+  };
 
-    return {
-        view,
-        setView,
-        clienteID,
-        setClienteID,
-        clienteData,
-        newClienteData,
-        handleRegister,
-        handleInputChange,
-        handleSearchCliente,
-        handleSaveChanges,
-    };
+  const handleDisableCliente = async () => {
+    try {
+      const response = await axios.put(`${API_URL}/disable/${clienteID}`);
+      setIsClienteDisabled(true);
+      alert("Cliente deshabilitado con éxito");
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.DISABLE_CLIENTE, error);
+    }
+  };
+
+  const handleEnableCliente = async () => {
+    try {
+      console.log(`URL: ${API_URL}/enable/${clienteID}`);
+      const response = await axios.put(`${API_URL}/enable/${clienteID}`);
+      setIsClienteDisabled(false);
+      alert("Cliente habilitado con éxito");
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.ENABLE_CLIENTE, error);
+    }
+  };
+
+  return {
+    view,
+    setView,
+    clienteID,
+    setClienteID,
+    clienteData,
+    newClienteData,
+    isClienteDisabled,
+    handleInputChange,
+    handleSearchCliente,
+    handleRegister,
+    handleSaveChanges,
+    handleDisableCliente,
+    handleEnableCliente,
+  };
 };
 
-export default useCliente;
+export default useClienteForm;

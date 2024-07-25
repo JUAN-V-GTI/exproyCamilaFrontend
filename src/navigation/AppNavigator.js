@@ -8,7 +8,7 @@ import HomeVenScreen from '../screens/HomeVenScreen';
 import ClientesScreen from '../screens/ClientesScreen';
 import VendedoresScreen from '../screens/VendedoresScreen';
 import InventarioScreen from '../screens/InventarioScreen';
-import PedidosScreen from '../screens/PedidosScreen';
+import ProductoScreen from '../screens/ProductoScreen';
 import VentasScreen from '../screens/VentasScreen';
 import CatalogoScreen from '../screens/CatalogoScreen';
 
@@ -24,7 +24,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Cliente" component={ClientesScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Catalogo" component={CatalogoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Venta" component={VentasScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Pedido" component={PedidosScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Producto" component={ProductoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Inventario" component={InventarioScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Vendedor" component={VendedoresScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
