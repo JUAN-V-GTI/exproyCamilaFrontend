@@ -36,6 +36,7 @@ const CatalogScreen = () => {
   };
 
   return (
+  
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 10 }}>
         
@@ -109,8 +110,10 @@ const CatalogScreen = () => {
         </View>
       </Modal>
     </View>
+    
   );
-};const styles = StyleSheet.create({
+};
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -119,51 +122,7 @@ const CatalogScreen = () => {
     },
    
  
-    // inputContainer: {
-    //     flexDirection: 'row',
-    //     alignItems: 'center',
-    //     backgroundColor: 'white',
-    //     borderRadius: 8,
-    //     marginBottom: 15,
-    //     paddingHorizontal: 10,
-    //     elevation: 5,
-    //     width: '90%',
-    // },
-    // icon: {
-    //     marginRight: 10,
-    // },
-    // textInput: {
-    //     flex: 1,
-    //     height: 50,
-    //     color: '#525fe1',
-    // },
-    // checkboxT: {
-    //     flexDirection: 'row',
-    //     alignItems: 'center',
-    //     marginBottom: 20,
-    // },
-    // Terminos: {
-    //     marginLeft: 10,
-    // },
-    // padreBoton: {
-    //     flexDirection: 'row', // Alineación horizontal
-    //     justifyContent: 'center', // Centra los elementos horizontalmente
-    //     alignItems: 'center',
-    //     marginTop: 50,
-    // },
-    // cajaBoton: {
-    //     backgroundColor: '#525fe1',
-    //     borderRadius: 10,
-
-    //     paddingVertical: 10,
-    //     width: 150,
-    //     marginTop: 100,
-    //     marginHorizontal: 10, // Espacio horizontal entre los botones
-    // },
-    // textBoton: {
-    //     textAlign: 'center',
-    //     color: 'white',
-    // },
+   
 });
 
 export default CatalogScreen;
