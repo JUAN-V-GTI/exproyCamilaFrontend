@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import useClienteForm from '../hooks/useClienteForm';
-import styles from '../../styles/clienteStyles';
+import styles from '../../styles/formsStyles';
 import TextInputWithIcon from '../components/TextInputWithIcon';
 import Header from '../components/Header'; // Ajusta la importación según tu estructura de archivos
 

@@ -1,6 +1,6 @@
 //constants/clientConstatnts.js
-export const initialClienteData = {
-    name: '',
+export const initialproductoData = {
+    producto: '',
     genero: '',
     talla: '',
     color: '',
@@ -10,9 +10,11 @@ export const initialClienteData = {
 };
 
 export const API_ERROR_MESSAGES = {
-    REGISTER_PRODUCTO: 'Error al registrar cliente',
-    SEARCH_PRODUCTO: 'Error al buscar cliente',
-    UPDATE_PRODUCTO: 'Error al actualizar cliente',
+    REGISTER_PRODUCTO: 'Error al registrar producto',
+    SEARCH_PRODUCTO: 'Error al buscar producto',
+    UPDATE_PRODUCTO: 'Error al actualizar producto',
+    DISABLE_PRODUCTO: "Error al deshabilitar producto",
+    ENABLE_PRODUCTO: "Error al habilitar producto",
 };
 
 export const SCREEN_VIEWS = {

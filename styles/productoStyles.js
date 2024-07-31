@@ -1,4 +1,3 @@
-// src/styles/clienteStyles.js
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -49,40 +48,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
     },
-    // searchContainer: {
-    //     flexDirection: 'row',
-    //     marginBottom: 10,
-    //     borderRadius:50,
-    //     padding:4,
-    //     backgroundColor: '#e3e3e3',
-      
-    // },
-    // searchInput: {
-    //     flex: 1,
-    //     color: '#1004fc',
-    //     marginRight: 10,
-    //     borderRadius:10,
-        
-    // },
-    // searchButtonText: {
-    //     color: '#fff',
-       
-    // },
-    // searchButtonText: {
-    //     marginTop:1,
-    //     marginBottom:3,
-    //     marginRight:10,
-    //     marginLeft:10,
-    //     fontSize:20,
-        
-    //     color: '#1004fc',
-    // },
-    // iconsearch: {
-    //     color: '#8f8f8f',
-    //     marginTop:5,
-    //     marginRight:10,
-    //     marginLeft:4,
-    // },  
     scrollView: {
         flex: 1,
         margin: 20,
@@ -124,9 +89,22 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
     },
+    imagePickerButton: {
+        backgroundColor: '#007BFF',
+        padding: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginVertical: 10,
+    },
     buttonText: {
         color: '#fff',
         fontSize: 18,
+    },
+    imagePreview: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        marginVertical: 10,
     },
 });
 

@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
         try {
             await login({ username, password });
 
-            if (username === "JuanAdmin" || username === "RaquelAdmin") {
+            if (username === "JuanAdmin" || username === "A") {
                 navigation.navigate('Home', { username });
             } else {
                 navigation.navigate('HomeVen', { username });
@@ -77,9 +77,10 @@ const LoginScreen = ({ navigation }) => {
             >
                 <View style={styles.inner}>
                     <Animated.View style={{ opacity: imageOpacity }}>
-                        <Image source={require('../../assets/logo.png')} style={styles.logo} />
+                        <Image source={require('../../assets/Logs.png')} style={styles.logo} />
                     </Animated.View>
                     <Text style={styles.titulo}>Login</Text>
+
 
                     <View style={styles.whiteContainer}>
                         <View style={styles.inputContainer}>
@@ -110,7 +111,7 @@ const LoginScreen = ({ navigation }) => {
                                 <Text style={styles.textBoton}>Sign In</Text>
                             </TouchableOpacity>
                             {/* <TouchableOpacity style={styles.cajaBoton} onPress={handleRegister}>
-                                <Text style={styles.textBoton}>Register</Text>
+                                <Text style={styles.textBoton}>register</Text>
                             </TouchableOpacity> */}
                         </View>
                     </View>
@@ -141,8 +142,8 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     logo: {
-        width: 150,
-        height: 150,
+        width: 250,
+        height: 250,
         marginBottom: 20,
     },
     titulo: {
