@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.100.2:8080/camila-acces';
+const API_URL = 'http://192.168.100.2:8080/cam';
 
 export const login = async (credentials) => {
     try {

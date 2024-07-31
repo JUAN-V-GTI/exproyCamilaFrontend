@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Linking,
+  FlatList,
   Alert,
 } from "react-native";
 import useClienteForm from "../hooks/useClienteForm";
-import styles from "../../styles/clienteStyles";
+import styles from "../../styles/formsStyles";
+
 import TextInputWithIcon from "../components/TextInputWithIcon";
-import Header from "../components/Header"; // Ajusta la importación según tu estructura de archivos
+import Header from "../components/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const ClientesScreen = ({ navigation }) => {
   const {
@@ -31,10 +33,45 @@ const ClientesScreen = ({ navigation }) => {
     isClienteDisabled,
     handleDisableCliente,
     handleEnableCliente,
+    fetchAllClientes,
+    clientesList,
   } = useClienteForm();
+  const [showClientes, setShowClientes] = useState(false); // Define el estado aquí
+  useEffect(() => {
+    fetchAllClientes();
+  }, []);
 
   const handleGoHome = () => {
     navigation.navigate("Home");
+  };
+
+  const renderClienteItem = ({ item }) => {
+    console.log("Cliente item:", item); // Verificar los datos de cada cliente
+    return (
+      <View style={styles.tableRow}>
+        <Text style={styles.id}>{item.id}</Text>
+        <Text style={styles.nombre}>{`${item.name} ${item.firstname}`}</Text>
+        <View style={styles.icon1}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`tel:${item.phoneNumber}`)}
+          >
+            <Icon name="phone" style={{ fontSize: 24, color: "#007bff" }} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(`whatsapp://send?phone=${item.phoneNumber}`)
+            }
+          >
+            <Icon name="whatsapp" style={{ fontSize: 24, color: "#34C759" }} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`mailto:${item.email}`)}
+          >
+            <Icon name="envelope" style={{ fontSize: 24, color: "#250e95" }} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   };
 
   return (
@@ -47,15 +84,35 @@ const ClientesScreen = ({ navigation }) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <Header setView={setView} handleGoHome={handleGoHome} />
+        <TouchableOpacity
+          style={styles.showButton}
+          onPress={() => setShowClientes(!showClientes)}
+        >
+          <Text style={styles.showButtonText}>
+            {showClientes ? "Ocultar Clientes" : "Mostrar Clientes"}
+          </Text>
+        </TouchableOpacity>
 
-        {view === "default" && (
-          <View style={styles.defaultView}>
-            <Image
-              source={require("../../assets/logo.png")}
-              style={styles.logo}
-            />
-            <Text style={styles.logoText}>En construcción</Text>
-          </View>
+        {showClientes && (
+          <View style={styles.containerTable}>
+            <View style={styles.tableHeader}>
+              <Text style={styles.tableHeaderCell}>ID</Text>
+              <Text style={styles.tableHeaderNombre}>Nombre</Text>
+              <View style={styles.tableHeaderIconos}>
+                <Icon name="phone" style={{ fontSize: 24 }} />
+                <Icon name="whatsapp" style={{ fontSize: 24 }} />
+                <Icon name="envelope" style={{ fontSize: 24 }} />
+              </View>
+            </View>
+
+            <ScrollView style={styles.scrollView}>
+      <FlatList
+        data={clientesList}
+        renderItem={renderClienteItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </ScrollView>
+  </View>
         )}
 
         {view === "edit" && (
@@ -103,19 +160,34 @@ const ClientesScreen = ({ navigation }) => {
                   }
                 />
                 <TextInputWithIcon
-                  icon="phone"
-                  placeholder="Teléfono"
-                  value={clienteData.phoneNumber}
-                  onChangeText={(text) =>
-                    handleInputChange("phoneNumber", text)
-                  }
-                />
-                <TextInputWithIcon
-                  icon="envelope"
-                  placeholder="Correo Electrónico"
-                  value={clienteData.email}
-                  onChangeText={(text) => handleInputChange("email", text)}
-                />
+  icon="phone"
+  placeholder="Teléfono"
+  value={clienteData.phoneNumber}
+  keyboardType="numeric" // Aceptar solo números
+  maxLength={10} // Limitar la longitud a 10 caracteres
+  onChangeText={(text) => {
+    const numericText = text.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
+    if (numericText.length <= 10) {
+      handleInputChange("phoneNumber", numericText);
+    }
+    if (text !== numericText) {
+      Alert.alert(
+        'Error',
+        'Solo se aceptan dígitos',
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+        { cancelable: false }
+      );
+    }
+  }}
+/>
+<TextInputWithIcon
+  icon="envelope"
+  placeholder="Correo Electrónico"
+  value={clienteData.email}
+  onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
+/>
                 <TextInputWithIcon
                   icon="sticky-note"
                   placeholder="Notas"
@@ -175,17 +247,34 @@ const ClientesScreen = ({ navigation }) => {
               onChangeText={(text) => handleInputChange("institution", text)}
             />
             <TextInputWithIcon
-              icon="phone"
-              placeholder="Teléfono"
-              value={newClienteData.phoneNumber}
-              onChangeText={(text) => handleInputChange("phoneNumber", text)}
-            />
-            <TextInputWithIcon
-              icon="envelope"
-              placeholder="Correo Electrónico"
-              value={newClienteData.email}
-              onChangeText={(text) => handleInputChange("email", text)}
-            />
+  icon="phone"
+  placeholder="Teléfono"
+  value={newClienteData.phoneNumber}
+  keyboardType="numeric" // Aceptar solo números
+  maxLength={10} // Limitar la longitud a 10 caracteres
+  onChangeText={(text) => {
+    const numericText = text.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
+    if (numericText.length <= 10) {
+      handleInputChange("phoneNumber", numericText);
+    }
+    if (text !== numericText) {
+      Alert.alert(
+        'Error',
+        'Solo se aceptan dígitos',
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+        { cancelable: false }
+      );
+    }
+  }}
+/>
+<TextInputWithIcon
+  icon="envelope"
+  placeholder="Correo Electrónico"
+  value={newClienteData.email}
+  onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
+/>
             <TextInputWithIcon
               icon="sticky-note"
               placeholder="Notas"

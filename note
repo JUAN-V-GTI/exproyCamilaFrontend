@@ -53,6 +53,8 @@ npm install @react-native-community/unsafe-performant-view
 npm install react-native-snap-carousel
 npm install react-native-reanimated react-native-gesture-handler
 npm install react-native-linear-gradient
+npm install react-hook-form yup @hookform/resolvers
+
 
 
 

@@ -1,8 +1,9 @@
-// src/hooks/useClienteForm.js
 import { useState } from "react";
+
 import { initialClienteData } from "../constants/clienteConstants";
 import axios from "axios";
 import { API_ERROR_MESSAGES } from "../constants/clienteConstants";
+
 const API_URL = "http://192.168.100.2:8083/api/clientes";
 
 const useClienteForm = () => {
@@ -11,6 +12,7 @@ const useClienteForm = () => {
   const [clienteData, setClienteData] = useState(null);
   const [newClienteData, setNewClienteData] = useState(initialClienteData);
   const [isClienteDisabled, setIsClienteDisabled] = useState(false);
+  const [clientesList, setClientesList] = useState([]);
 
   const handleInputChange = (name, value) => {
     if (view === "edit") {
@@ -76,13 +78,23 @@ const useClienteForm = () => {
       console.error(API_ERROR_MESSAGES.ENABLE_CLIENTE, error);
     }
   };
+  const fetchAllClientes = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/lista/all`);
+      console.log("Response data:", response.data); // Verificar los datos recibidos
+      setClientesList(response.data);
+    } catch (error) {
+      console.error(API_ERROR_MESSAGES.FETCH_ALL_CLIENTES, error);
+    }
+  };
 
   return {
     view,
     setView,
     clienteID,
-    setClienteID,
     clienteData,
+    setClienteID,
+    clientesList,
     newClienteData,
     isClienteDisabled,
     handleInputChange,
@@ -91,6 +103,7 @@ const useClienteForm = () => {
     handleSaveChanges,
     handleDisableCliente,
     handleEnableCliente,
+    fetchAllClientes,
   };
 };
 

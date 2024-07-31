@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'rea
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Asegúrate de tener react-native-vector-icons instalado
+import { LinearGradient } from 'expo-linear-gradient';
 
 const HomeScreen = ({ route }) => {
   const { username } = route.params;
@@ -32,13 +33,22 @@ const HomeScreen = ({ route }) => {
   const handleVendedor = () => {
     navigation.navigate('Vendedor');
   };
-
+  const handleProducto = () => {
+    navigation.navigate('Producto');
+  };
+  const handleProveedor = () => {
+    navigation.navigate('Proveedor');
+  };
+  const handleRegister = () => {
+    navigation.navigate('Register');
+  };
   return (
+    
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.headerText}>Bienvenido, Administrador!</Text>
+            <Text style={styles.headerText}>Bienvenido</Text>
             <TouchableOpacity onPress={() => setShowDropdown(!showDropdown)}>
               <View style={styles.avatar}>
                 <Icon name="account-circle" size={30} color="#fff" />
@@ -48,12 +58,26 @@ const HomeScreen = ({ route }) => {
 
           {showDropdown && (
             <View style={styles.dropdown}>
+              
+              <Text style={styles.dropdownText}>Camila</Text>
+
               <TouchableOpacity style={styles.dropdownItem} onPress={() => {}}>
-                <Icon name="account-circle" size={20} color="#333" />
+                <Icon name="account-circle" size={20} color="#8dd684" />
                 <Text style={styles.dropdownText}>{username}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.dropdownItem} onPress={handleLogout}>
-                <Icon name="logout" size={20} color="#333" />
+
+             
+              <View style={styles.dropdownItem}>
+                <Icon name="security" size={20} color="#8dd684" />
+                <Text style={styles.dropdownText}>Rol: Administrador</Text>
+              </View>
+
+             
+              <TouchableOpacity
+                style={styles.dropdownItem}
+                onPress={handleLogout}
+              >
+                <Icon name="logout" size={20} color="#8dd684" />
                 <Text style={styles.dropdownText}>Salir de sesión</Text>
               </TouchableOpacity>
             </View>
@@ -61,31 +85,31 @@ const HomeScreen = ({ route }) => {
 
           <ScrollView>
             <View style={styles.row}>
-              <TouchableOpacity style={styles.button} onPress={handleCatalogo}>
-                <View style={styles.imageContainer}>
-                  <Image source={require('../../assets/catalog.png')} style={styles.image} />
-                </View>
-                <Text style={styles.buttonText}>CATALOGO</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={handleVenta}>
-                <View style={styles.imageContainer}>
-                  <Image source={require('../../assets/mon.png')} style={styles.image} />
-                </View>
-                <Text style={styles.buttonText}>VENTAS</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.row}>
-              <TouchableOpacity style={styles.button} onPress={handlePedido}>
-                <View style={styles.imageContainer}>
-                  <Image source={require('../../assets/camions.png')} style={styles.image} />
-                </View>
-                <Text style={styles.buttonText}>PRODUCTO</Text>
-              </TouchableOpacity>
               <TouchableOpacity style={styles.button} onPress={handleCliente}>
                 <View style={styles.imageContainer}>
                   <Image source={require('../../assets/doc.png')} style={styles.image} />
                 </View>
                 <Text style={styles.buttonText}>CLIENTES</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={handleRegister}>
+                <View style={styles.imageContainer}>
+                  <Image source={require('../../assets/VEND.png')} style={styles.image} />
+                </View>
+                <Text style={styles.buttonText}>VENDEDORES</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.row}>
+              <TouchableOpacity style={styles.button} onPress={handleProducto}>
+                <View style={styles.imageContainer}>
+                  <Image source={require('../../assets/mujer1.png')} style={styles.image} />
+                </View>
+                <Text style={styles.buttonText}>PRODUCTO</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={handleProveedor}>
+                <View style={styles.imageContainer}>
+                  <Image source={require('../../assets/camions.png')} style={styles.image} />
+                </View>
+                <Text style={styles.buttonText}>PROVEEDORES</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.row}>
@@ -95,11 +119,11 @@ const HomeScreen = ({ route }) => {
                 </View>
                 <Text style={styles.buttonText}>INVENTARIO</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={handleVendedor}>
+              <TouchableOpacity style={styles.button} onPress={handleCatalogo}>
                 <View style={styles.imageContainer}>
-                  <Image source={require('../../assets/VEND.png')} style={styles.image} />
+                  <Image source={require('../../assets/catalog.png')} style={styles.image} />
                 </View>
-                <Text style={styles.buttonText}>VENDEDORES</Text>
+                <Text style={styles.buttonText}>CATALOGO</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
@@ -112,23 +136,25 @@ const HomeScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d8f5ff',
+    backgroundColor: '#a1fbff',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#cce8f2',
+    padding: 8,
+    backgroundColor: '#a1fbff',
   },
   headerText: {
-    fontSize: 16,
+    fontSize: 19,
     fontWeight: 'bold',
+    marginStart:11,
   },
   avatar: {
-    backgroundColor: '#558B2F',
+    backgroundColor: '#002792',
     padding: 8,
     borderRadius: 50,
+    marginEnd:11,
   },
   dropdown: {
     position: 'absolute',
@@ -138,18 +164,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.250,
     shadowRadius: 3.84,
-    elevation: 15,
+    elevation: 1,
     zIndex: 1,
   },
   dropdownItem: {
-    padding: 10,
+    padding:20,
     flexDirection: 'row',
     alignItems: 'center',
   },
   dropdownText: {
-    marginLeft: 10,
+    marginLeft: 20,
   },
   buttonsContainer: {
     flex: 1,
@@ -171,9 +197,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
     padding: 10,
     paddingVertical: 40,
-    borderRadius: 8,
-    elevation: 20,
-    borderColor: '#138ede',
+    borderRadius: 10,
+    elevation: 30,
+    borderColor: '#70a8b8',
+    borderWidth: 0,
+    borderBottomWidth: 3, // Borde inferior más grueso
+    borderLeftWidth: 3, // Borde izquierdo más grueso
+  
     margin: 18,
   },
   row: {

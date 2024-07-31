@@ -10,7 +10,8 @@ import VendedoresScreen from '../screens/VendedoresScreen';
 import InventarioScreen from '../screens/InventarioScreen';
 import ProductoScreen from '../screens/ProductoScreen';
 import VentasScreen from '../screens/VentasScreen';
-import CatalogoScreen from '../screens/CatalogoScreen';
+// import CatalogoScreen from '../screens/CatalogoScreen';
+import ProveedorScreen from '../screens/ProveedorScreen';
 
 const Stack = createStackNavigator();
 const AppNavigator = () => {
@@ -22,11 +23,12 @@ const AppNavigator = () => {
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="HomeVen" component={HomeVenScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Cliente" component={ClientesScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Catalogo" component={CatalogoScreen} options={{ headerShown: false }} />
+        {/* <Stack.Screen name="Catalogo" component={CatalogoScreen} options={{ headerShown: false }} /> */}
         <Stack.Screen name="Venta" component={VentasScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Producto" component={ProductoScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Inventario" component={InventarioScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Vendedor" component={VendedoresScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Proveedor" component={ProveedorScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
