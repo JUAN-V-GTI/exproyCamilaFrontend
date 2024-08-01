@@ -11,6 +11,7 @@ const useProveedorForm = () =>{
     const [proveedorDate, setProveedorDate] = useState(null);
     const [newProveedorDate, setNewProveedorDate] =useState (initialProveedorData);
     const [isProveedorDisabled, setIsProveedorDisabled] = useState(false);
+    const [proverdoresList, setProveedoresList] = useState([]);
     
     const handleInputChange = (name, value) => {
         if (view === "edit") {
@@ -75,6 +76,16 @@ const useProveedorForm = () =>{
                     console.error(API_ERROR_MESSAGES.ENABLE_PROVEEDOR, error);
                     }
                     };
+                    const fetchAllClientes = async () => {
+                        try {
+                          const response = await axios.get(`${API_URL}/lista/all`);
+                          console.log("Response data:", response.data); // Verificar los datos recibidos
+                          setProveedorList(response.data);
+                        } catch (error) {
+                          console.error(API_ERROR_MESSAGES.FETCH_ALL_CLIENTES, error);
+                        }
+     
+                    };
 
 return{
     view,
@@ -82,6 +93,7 @@ return{
     proveedorID,
     setProveedorID,
     proveedorDate,
+    proveedorList,
     newProveedorDate,
     isProveedorDisabled,
     handleInputChange,
@@ -90,7 +102,8 @@ return{
     handleSaveChanges,
     handleDisableProveedor,
     handleEnableProveedor,
-
+    fetchAllProveedores,
+ 
 
 };
 
