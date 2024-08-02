@@ -180,6 +180,8 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         
       },
+      
+      
 });
 
 export default styles;

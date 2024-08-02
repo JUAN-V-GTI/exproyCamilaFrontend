@@ -106,13 +106,13 @@ const ClientesScreen = ({ navigation }) => {
             </View>
 
             <ScrollView style={styles.scrollView}>
-      <FlatList
-        data={clientesList}
-        renderItem={renderClienteItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </ScrollView>
-  </View>
+              <FlatList
+                data={clientesList}
+                renderItem={renderClienteItem}
+                keyExtractor={(item) => item.id.toString()}
+              />
+            </ScrollView>
+          </View>
         )}
 
         {view === "edit" && (
@@ -160,34 +160,34 @@ const ClientesScreen = ({ navigation }) => {
                   }
                 />
                 <TextInputWithIcon
-  icon="phone"
-  placeholder="Teléfono"
-  value={clienteData.phoneNumber}
-  keyboardType="numeric" // Aceptar solo números
-  maxLength={10} // Limitar la longitud a 10 caracteres
-  onChangeText={(text) => {
-    const numericText = text.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
-    if (numericText.length <= 10) {
-      handleInputChange("phoneNumber", numericText);
-    }
-    if (text !== numericText) {
-      Alert.alert(
-        'Error',
-        'Solo se aceptan dígitos',
-        [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ],
-        { cancelable: false }
-      );
-    }
-  }}
-/>
-<TextInputWithIcon
-  icon="envelope"
-  placeholder="Correo Electrónico"
-  value={clienteData.email}
-  onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
-/>
+                  icon="phone"
+                  placeholder="Teléfono"
+                  value={clienteData.phoneNumber}
+                  keyboardType="numeric" // Aceptar solo números
+                  maxLength={10} // Limitar la longitud a 10 caracteres
+                  onChangeText={(text) => {
+                    const numericText = text.replace(/[^0-9]/g, ""); // Eliminar caracteres no numéricos
+                    if (numericText.length <= 10) {
+                      handleInputChange("phoneNumber", numericText);
+                    }
+                    if (text !== numericText) {
+                      Alert.alert(
+                        "Error",
+                        "Solo se aceptan dígitos",
+                        [
+                          { text: "OK", onPress: () => console.log("OK Pressed") },
+                        ],
+                        { cancelable: false }
+                      );
+                    }
+                  }}
+                />
+                <TextInputWithIcon
+                  icon="envelope"
+                  placeholder="Correo Electrónico"
+                  value={clienteData.email}
+                  onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
+                />
                 <TextInputWithIcon
                   icon="sticky-note"
                   placeholder="Notas"
@@ -247,34 +247,34 @@ const ClientesScreen = ({ navigation }) => {
               onChangeText={(text) => handleInputChange("institution", text)}
             />
             <TextInputWithIcon
-  icon="phone"
-  placeholder="Teléfono"
-  value={newClienteData.phoneNumber}
-  keyboardType="numeric" // Aceptar solo números
-  maxLength={10} // Limitar la longitud a 10 caracteres
-  onChangeText={(text) => {
-    const numericText = text.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
-    if (numericText.length <= 10) {
-      handleInputChange("phoneNumber", numericText);
-    }
-    if (text !== numericText) {
-      Alert.alert(
-        'Error',
-        'Solo se aceptan dígitos',
-        [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ],
-        { cancelable: false }
-      );
-    }
-  }}
-/>
-<TextInputWithIcon
-  icon="envelope"
-  placeholder="Correo Electrónico"
-  value={newClienteData.email}
-  onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
-/>
+              icon="phone"
+              placeholder="Teléfono"
+              value={newClienteData.phoneNumber}
+              keyboardType="numeric" // Aceptar solo números
+              maxLength={10} // Limitar la longitud a 10 caracteres
+              onChangeText={(text) => {
+                const numericText = text.replace(/[^0-9]/g, ""); // Eliminar caracteres no numéricos
+                if (numericText.length <= 10) {
+                  handleInputChange("phoneNumber", numericText);
+                }
+                if (text !== numericText) {
+                  Alert.alert(
+                    "Error",
+                    "Solo se aceptan dígitos",
+                    [
+                      { text: "OK", onPress: () => console.log("OK Pressed") },
+                    ],
+                    { cancelable: false }
+                  );
+                }
+              }}
+            />
+            <TextInputWithIcon
+              icon="envelope"
+              placeholder="Correo Electrónico"
+              value={newClienteData.email}
+              onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
+            />
             <TextInputWithIcon
               icon="sticky-note"
               placeholder="Notas"
