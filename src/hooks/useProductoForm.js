@@ -1,18 +1,16 @@
 import { useState } from "react";
-import { initialProductoData } from "../constants/productoConstants";
-import axios from "axios";
-import { launchImageLibrary } from "react-native-image-picker";
-import { API_ERROR_MESSAGES } from "../constants/productoConstants";
+import { initialProductoData, API_ERROR_MESSAGES } from "../constants/clienteConstants";
+import axios from 'axios';
 
-const API_URL = "http://192.168.100.2:8083/api/productos";
+const apiUrl = "http://192.168.100.2:8083/api/productos";
 
 const useProductoForm = () => {
   const [view, setView] = useState("default");
   const [productoID, setProductoID] = useState("");
-  const [productoData, setProductoData] = useState({});
+  const [productoData, setProductoData] = useState(null);
   const [newProductoData, setNewProductoData] = useState(initialProductoData);
   const [isProductoDisabled, setIsProductoDisabled] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [productosList, setProductosList] = useState([]);
 
   const handleInputChange = (name, value) => {
     if (view === "edit") {
@@ -22,130 +20,70 @@ const useProductoForm = () => {
     }
   };
 
-  const handleImagePick = () => {
-    const options = {
-      mediaType: "photo",
-      quality: 1,
-    };
-    launchImageLibrary(options, (response) => {
-      if (response.didCancel) {
-        console.log("User cancelled image picker");
-      } else if (response.error) {
-        console.log("ImagePicker Error: ", response.error);
-      } else if (response.assets && response.assets.length > 0) {
-        setSelectedImage(response.assets[0]);
-        handleInputChange("imagen", response.assets[0].uri);
-      }
-    });
-  };
-
   const handleSearchProducto = async () => {
     try {
-      const response = await axios.get(`${API_URL}/search/${productoID}`);
+      const response = await axios.get(`${apiUrl}/search/${productoID}`);
       setProductoData(response.data);
       setView("edit");
     } catch (error) {
-      console.error(API_ERROR_MESSAGES.SEARCH_PRODUCTO, error);
+      console.error(API_ERROR_MESSAGES.SEARCH_producto, error);
     }
   };
 
   const handleRegister = async () => {
     try {
-      const formData = new FormData();
-      for (const key in newProductoData) {
-        formData.append(key, newProductoData[key]);
-      }
-      if (selectedImage) {
-        formData.append("imagen", {
-          uri: selectedImage.uri,
-          type: selectedImage.type,
-          name: selectedImage.fileName,
-        });
-      }
-  
-      const response = await axios.post(`${API_URL}/save/producto`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-  
-      alert("Producto registrado con éxito");
+      const response = await axios.post(
+        `${apiUrl}/save/producto`,
+        newProductoData
+      );
+      alert("producto registrado con éxito");
       setNewProductoData(initialProductoData);
     } catch (error) {
-      console.error(API_ERROR_MESSAGES.REGISTER_PRODUCTO, error);
+      console.error(API_ERROR_MESSAGES.REGISTER_producto, error);
     }
   };
+
   const handleSaveChanges = async () => {
     try {
-      const formData = new FormData();
-      for (const key in productoData) {
-        formData.append(key, productoData[key]);
-      }
-      if (selectedImage) {
-        formData.append("imagen", {
-          uri: selectedImage.uri,
-          type: selectedImage.type,
-          name: selectedImage.fileName,
-        });
-      }
-
-      const response = await axios.put(`${API_URL}/update/${productoID}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      alert("Producto actualizado con éxito");
+      const response = await axios.put(
+        `${apiUrl}/update/${productoID}`,
+        productoData
+      );
+      alert("producto actualizado con éxito");
       setProductoData(response.data);
     } catch (error) {
-      console.error(API_ERROR_MESSAGES.UPDATE_PRODUCTO, error);
+      console.error(API_ERROR_MESSAGES.UPDATE_producto, error);
     }
   };
 
   const handleDisableProducto = async () => {
     try {
-      await axios.patch(`${API_URL}/disable/${productoID}`);
-      alert("Producto deshabilitado con éxito");
+      const response = await axios.put(`${apiUrl}/disable/${productoID}`);
       setIsProductoDisabled(true);
+      alert("producto deshabilitado con éxito");
     } catch (error) {
-      console.error(API_ERROR_MESSAGES.DISABLE_PRODUCTO, error);
+      console.error(API_ERROR_MESSAGES.DISABLE_producto, error);
     }
   };
 
   const handleEnableProducto = async () => {
     try {
-      await axios.patch(`${API_URL}/enable/${productoID}`);
+      console.log(`URL: ${apiUrl}/enable/${productoID}`);
+      const response = await axios.put(`${apiUrl}/enable/${productoID}`);
       setIsProductoDisabled(false);
-      alert("Producto habilitado con éxito");
+      alert("producto habilitado con éxito");
     } catch (error) {
-      console.error(API_ERROR_MESSAGES.ENABLE_PRODUCTO, error);
+      console.error(API_ERROR_MESSAGES.ENABLE_producto, error);
     }
   };
 
-  const handleUploadFile = async (file) => {
+  const fetchAllProductos = async () => {
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await axios.post(`${API_URL}/uploads`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      alert("Archivo subido con éxito");
-      return response.data;
+      const response = await axios.get(`${apiUrl}/lista/all`);
+      console.log("Response data:", response.data); // Verificar los datos recibidos
+      setProductosList(response.data);
     } catch (error) {
-      console.error("Error al subir el archivo", error);
-    }
-  };
-
-  const handleDeleteFile = async (filename) => {
-    try {
-      await axios.delete(`${API_URL}/uploads/${filename}`);
-      alert("Archivo eliminado con éxito");
-    } catch (error) {
-      console.error("Error al eliminar el archivo", error);
+      console.error(API_ERROR_MESSAGES.FETCH_ALL_productoES, error);
     }
   };
 
@@ -156,16 +94,15 @@ const useProductoForm = () => {
     setProductoID,
     productoData,
     newProductoData,
-    isProductoDisabled,
     handleRegister,
     handleInputChange,
     handleSearchProducto,
     handleSaveChanges,
+    isProductoDisabled,
     handleDisableProducto,
     handleEnableProducto,
-    handleImagePick,
-    handleUploadFile,
-    handleDeleteFile,
+    fetchAllProductos,
+    productosList,
   };
 };
 

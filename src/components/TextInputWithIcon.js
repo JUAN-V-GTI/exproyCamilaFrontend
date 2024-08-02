@@ -1,5 +1,5 @@
 // src/components/TextInputWithIcon.js
-// src/components/TextInputWithIcon.js
+
 import React from "react";
 import { View, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";

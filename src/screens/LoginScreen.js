@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
         try {
             await login({ username, password });
 
-            if (username === "JuanAdmin" || username === "A") {
+            if (username === "JuanAdmin" || username === "RaquelAdmin") {
                 navigation.navigate('Home', { username });
             } else {
                 navigation.navigate('HomeVen', { username });

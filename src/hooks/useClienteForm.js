@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { initialClienteData } from "../constants/clienteConstants";
-import axios from "axios";
-import { API_ERROR_MESSAGES } from "../constants/clienteConstants";
+import { initialClienteData,API_ERROR_MESSAGES  } from "../constants/clienteConstants";
+import Constants from 'expo-constants';
+import axios from 'axios'; // Add this line to import axios
 
-const API_URL = "http://192.168.100.2:8083/api/clientes";
+const apiUrl = Constants.expoConfig.extra.env.API_URL_CATALOGS;
+const anotherEnvVar = Constants.expoConfig.extra.env.ANOTHER_ENV_VAR;
 
 const useClienteForm = () => {
   const [view, setView] = useState("default");
@@ -23,7 +24,7 @@ const useClienteForm = () => {
 
   const handleSearchCliente = async () => {
     try {
-      const response = await axios.get(`${API_URL}/search/${clienteID}`);
+      const response = await axios.get(`${apiUrl}/search/${clienteID}`);
       setClienteData(response.data);
       setView("edit");
     } catch (error) {
@@ -34,7 +35,7 @@ const useClienteForm = () => {
   const handleRegister = async () => {
     try {
       const response = await axios.post(
-        `${API_URL}/save/client`,
+        `${apiUrl}/save/client`,
         newClienteData
       );
       alert("Cliente registrado con éxito");
@@ -47,7 +48,7 @@ const useClienteForm = () => {
   const handleSaveChanges = async () => {
     try {
       const response = await axios.put(
-        `${API_URL}/update/${clienteID}`,
+        `${apiUrl}/update/${clienteID}`,
         clienteData
       );
       alert("Cliente actualizado con éxito");
@@ -59,7 +60,7 @@ const useClienteForm = () => {
 
   const handleDisableCliente = async () => {
     try {
-      const response = await axios.put(`${API_URL}/disable/${clienteID}`);
+      const response = await axios.put(`${apiUrl}/disable/${clienteID}`);
       setIsClienteDisabled(true);
       alert("Cliente deshabilitado con éxito");
     } catch (error) {
@@ -69,8 +70,8 @@ const useClienteForm = () => {
 
   const handleEnableCliente = async () => {
     try {
-      console.log(`URL: ${API_URL}/enable/${clienteID}`);
-      const response = await axios.put(`${API_URL}/enable/${clienteID}`);
+      console.log(`URL: ${apiUrl}/enable/${clienteID}`);
+      const response = await axios.put(`${apiUrl}/enable/${clienteID}`);
       setIsClienteDisabled(false);
       alert("Cliente habilitado con éxito");
     } catch (error) {
@@ -79,7 +80,7 @@ const useClienteForm = () => {
   };
   const fetchAllClientes = async () => {
     try {
-      const response = await axios.get(`${API_URL}/lista/all`);
+      const response = await axios.get(`${apiUrl}/lista/all`);
       console.log("Response data:", response.data); // Verificar los datos recibidos
       setClientesList(response.data);
     } catch (error) {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Asegúrate de tener react-native-vector-icons instalado
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const HomeScreen = ({ route }) => {
@@ -15,9 +15,7 @@ const HomeScreen = ({ route }) => {
     navigation.navigate('Login'); // Navega a la pantalla de inicio de sesión después de cerrar sesión
   };
 
-  const handleCatalogo = () => {
-    navigation.navigate('Catalogo');
-  };
+  
   const handleVenta = () => {
     navigation.navigate('Venta');
   };
@@ -41,6 +39,9 @@ const HomeScreen = ({ route }) => {
   };
   const handleRegister = () => {
     navigation.navigate('Register');
+  };
+  const handleCatalogo = () => {
+    navigation.navigate('Catalogo');
   };
   return (
     

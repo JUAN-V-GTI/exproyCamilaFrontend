@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
-  FlatList,
   Linking,
+  FlatList,
+  Alert,
 } from "react-native";
 import useProveedorForm from "../hooks/useProveedorForm";
 import styles from "../../styles/formsStyles";
+
 import TextInputWithIcon from "../components/TextInputWithIcon";
 import Header from "../components/Header";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Icon from "react-native-vector-icons/FontAwesome";
 
-const ProveedorScreen = ({ navigation }) => {
+const ProveedoresScreen = ({ navigation }) => {
   const {
     view,
     setView,
@@ -26,17 +26,16 @@ const ProveedorScreen = ({ navigation }) => {
     setProveedorID,
     proveedorData,
     newProveedorData,
-    isProveedorDisabled,
+    handleRegister,
     handleInputChange,
     handleSearchProveedor,
-    handleRegister,
     handleSaveChanges,
+    isProveedorDisabled,
     handleDisableProveedor,
     handleEnableProveedor,
     fetchAllProveedores,
-    proveedorList,
+    proveedoresList,
   } = useProveedorForm();
-
   const [showProveedores, setShowProveedores] = useState(false);
 
   useEffect(() => {
@@ -54,13 +53,21 @@ const ProveedorScreen = ({ navigation }) => {
         <Text style={styles.id}>{item.id}</Text>
         <Text style={styles.nombre}>{`${item.name} ${item.firstname}`}</Text>
         <View style={styles.icon1}>
-          <TouchableOpacity onPress={() => Linking.openURL(`tel:${item.phoneNumber}`)}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`tel:${item.phoneNumber}`)}
+          >
             <Icon name="phone" style={{ fontSize: 24, color: "#007bff" }} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL(`whatsapp://send?phone=${item.phoneNumber}`)}>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(`whatsapp://send?phone=${item.phoneNumber}`)
+            }
+          >
             <Icon name="whatsapp" style={{ fontSize: 24, color: "#34C759" }} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`mailto:${item.email}`)}
+          >
             <Icon name="envelope" style={{ fontSize: 24, color: "#250e95" }} />
           </TouchableOpacity>
         </View>
@@ -70,9 +77,18 @@ const ProveedorScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      ></KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <Header setView={setView} handleGoHome={handleGoHome} />
-        <TouchableOpacity style={styles.showButton} onPress={() => setShowProveedores(!showProveedores)}>
+        <TouchableOpacity
+          style={styles.showButton}
+          onPress={() => setShowProveedores(!showProveedores)}
+        >
           <Text style={styles.showButtonText}>
             {showProveedores ? "Ocultar Proveedores" : "Mostrar Proveedores"}
           </Text>
@@ -89,9 +105,10 @@ const ProveedorScreen = ({ navigation }) => {
                 <Icon name="envelope" style={{ fontSize: 24 }} />
               </View>
             </View>
+
             <ScrollView style={styles.scrollView}>
               <FlatList
-                data={proveedorList}
+                data={proveedoresList}
                 renderItem={renderProveedorItem}
                 keyExtractor={(item) => item.id.toString()}
               />
@@ -108,7 +125,10 @@ const ProveedorScreen = ({ navigation }) => {
                 value={proveedorID}
                 onChangeText={setProveedorID}
               />
-              <TouchableOpacity style={styles.searchButton} onPress={handleSearchProveedor}>
+              <TouchableOpacity
+                style={styles.searchButton}
+                onPress={handleSearchProveedor}
+              >
                 <Text style={styles.searchButtonText}>Buscar</Text>
               </TouchableOpacity>
             </View>
@@ -132,12 +152,12 @@ const ProveedorScreen = ({ navigation }) => {
                   value={proveedorData.lastname}
                   onChangeText={(text) => handleInputChange("lastname", text)}
                 />
-                <TextInputWithIcon
-                  icon="institution"
-                  placeholder="Empresa"
-                  value={proveedorData.empresa}
-                  onChangeText={(text) => handleInputChange("empresa", text)}
-                />
+                 <TextInputWithIcon
+                    icon="institution"
+                    placeholder="Empresa"
+                    value={proveedorData.empresa}
+                    onChangeText={(text) =>handleInputChange("empresa", text)}
+                  />
                 <TextInputWithIcon
                   icon="phone"
                   placeholder="Teléfono"
@@ -153,12 +173,21 @@ const ProveedorScreen = ({ navigation }) => {
                       Alert.alert(
                         "Error",
                         "Solo se aceptan dígitos",
-                        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+                        [
+                          { text: "OK", onPress: () => console.log("OK Pressed") },
+                        ],
                         { cancelable: false }
                       );
                     }
                   }}
                 />
+                <TextInputWithIcon
+                    icon="credit-card"
+                    placeholder="Número de cuenta"
+                    value={proveedorData.numeroCuenta}
+                    onChangeText={(text) =>handleInputChange("numeroCuenta", text)}
+                    
+                  />
                 <TextInputWithIcon
                   icon="envelope"
                   placeholder="Correo Electrónico"
@@ -166,12 +195,15 @@ const ProveedorScreen = ({ navigation }) => {
                   onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
                 />
                 <TextInputWithIcon
-                  icon="sticky-note"
+                  icon="shield"
                   placeholder="Rol"
-                  value={proveedorData.rol}
+                  value={proveedorData.notes}
                   onChangeText={(text) => handleInputChange("rol", text)}
                 />
-                <TouchableOpacity style={styles.saveButton} onPress={handleSaveChanges}>
+                <TouchableOpacity
+                  style={styles.saveButton}
+                  onPress={handleSaveChanges}
+                >
                   <Text style={styles.buttonText}>Guardar Cambios</Text>
                 </TouchableOpacity>
                 {isProveedorDisabled ? (
@@ -183,7 +215,7 @@ const ProveedorScreen = ({ navigation }) => {
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
-                    style={[styles.saveButton, { backgroundColor: "red" }]}
+                    style={[styles.saveButton, { backgroundColor: "#8d0000" }]}
                     onPress={handleDisableProveedor}
                   >
                     <Text style={styles.buttonText}>Deshabilitar</Text>
@@ -193,7 +225,6 @@ const ProveedorScreen = ({ navigation }) => {
             )}
           </View>
         )}
-
         {view === "register" && (
           <ScrollView style={styles.scrollView}>
             <TextInputWithIcon
@@ -215,11 +246,11 @@ const ProveedorScreen = ({ navigation }) => {
               onChangeText={(text) => handleInputChange("lastname", text)}
             />
             <TextInputWithIcon
-              icon="institution"
-              placeholder="Institución"
-              value={newProveedorData.institution}
-              onChangeText={(text) => handleInputChange("institution", text)}
-            />
+                icon="institution"
+                placeholder="Empresa"
+                value={newProveedorData.empresa}
+                onChangeText={(text) => handleInputChange("empresa", text)}
+              />
             <TextInputWithIcon
               icon="phone"
               placeholder="Teléfono"
@@ -235,26 +266,37 @@ const ProveedorScreen = ({ navigation }) => {
                   Alert.alert(
                     "Error",
                     "Solo se aceptan dígitos",
-                    [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+                    [
+                      { text: "OK", onPress: () => console.log("OK Pressed") },
+                    ],
                     { cancelable: false }
                   );
                 }
               }}
             />
             <TextInputWithIcon
+                icon="credit-card"
+                placeholder="Número de cuenta"
+                value={newProveedorData.numeroCuenta}
+                onChangeText={(text) => handleInputChange("numeroCuenta", text)}
+              />
+            <TextInputWithIcon
               icon="envelope"
               placeholder="Correo Electrónico"
               value={newProveedorData.email}
               onChangeText={(text) => handleInputChange("email", text.toLowerCase())}
             />
-            <TextInputWithIcon
-              icon="sticky-note"
-              placeholder="Notas"
-              value={newProveedorData.notes}
-              onChangeText={(text) => handleInputChange("notes", text)}
-            />
-            <TouchableOpacity style={styles.saveButton} onPress={handleRegister}>
-              <Text style={styles.buttonText}>Registrar Proveedor</Text>
+             <TextInputWithIcon
+                icon="shield"
+                placeholder="Rol"
+                value={newProveedorData.rol}
+                onChangeText={(text) => handleInputChange("rol", text)}
+              />
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={handleRegister}
+            >
+              <Text style={styles.buttonText}>Registrar</Text>
             </TouchableOpacity>
           </ScrollView>
         )}
@@ -263,4 +305,4 @@ const ProveedorScreen = ({ navigation }) => {
   );
 };
 
-export default ProveedorScreen;
+export default ProveedoresScreen;

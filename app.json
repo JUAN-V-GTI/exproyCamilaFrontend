@@ -32,6 +32,11 @@
     "extra": {
       "eas": {
         "projectId": "c1115cf1-9edd-4255-8034-b6d94e660558"
+      },
+      "env": {
+        "API_URL_CATALOGS": "http://192.168.100.2:8083/api/clientes",
+        "API_URL_PROVEEDOR": "http://192.168.100.2:8083/api/proveedor",
+        "ANOTHER_ENV_VAR": "another value"
       }
     }
   }
